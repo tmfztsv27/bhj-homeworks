@@ -1,8 +1,16 @@
 let hits = 0;
 let misses = 0;
 
+const deadCounter = document.getElementById('dead');
+const lostCounter = document.getElementById('lost');
+
 function getHole(index) {
     return document.getElementById(`hole${index}`);
+}
+
+function updateScore() {
+    deadCounter.textContent = hits;
+    lostCounter.textContent = misses;
 }
 
 function checkGameStatus() {
@@ -18,6 +26,7 @@ function checkGameStatus() {
 function resetGame() {
     hits = 0;
     misses = 0;
+    updateScore();
 }
 
 for (let i = 1; i <= 9; i++) {
@@ -29,6 +38,7 @@ for (let i = 1; i <= 9; i++) {
         } else {
             misses++;
         }
+        updateScore();
         checkGameStatus();
     };
 }
