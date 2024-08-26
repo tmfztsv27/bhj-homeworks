@@ -10,10 +10,6 @@ cookie.onclick = function() {
     counter++;
     counterElement.textContent = counter;
 
-    // Меняем размер печеньки
-    const currentWidth = parseInt(cookie.width);
-    cookie.width = currentWidth === 200 ? 250 : 200;
-
     // Рассчитываем скорость клика
     const currentTime = new Date().getTime();
     if (lastClickTime !== 0) {
