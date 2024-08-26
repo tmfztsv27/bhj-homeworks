@@ -21,5 +21,5 @@ function startCountdown(duration) {
 }
 
 // Стартовое значение в секундах
-const countdownTime = 10;
+const countdownTime = 60;
 startCountdown(countdownTime);
