@@ -5,11 +5,10 @@ const counterElement = document.getElementById('clicker__counter');
 cookie.onclick = function() {
     counter++;
     counterElement.textContent = counter;
-    if (cookie.width === 200) {
-        cookie.width = 250;
-        cookie.height = 250;
+    
+    if (cookie.style.transform === 'scale(1)') {
+        cookie.style.transform = 'scale(1.25)';
     } else {
-        cookie.width = 200;
-        cookie.height = 200;
+        cookie.style.transform = 'scale(1)';
     }
 };
