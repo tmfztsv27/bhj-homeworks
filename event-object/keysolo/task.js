@@ -21,7 +21,7 @@ class Game {
       const typedChar = event.key;
       const expectedChar = this.currentSymbol.textContent;
 
-      // Compare both characters in lower case to ignore case sensitivity
+    
       if (typedChar.toLowerCase() === expectedChar.toLowerCase()) {
         this.success();
       } else {
