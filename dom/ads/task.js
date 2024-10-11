@@ -1,22 +1,33 @@
-document.addEventListener('DOMContentLoaded', () => {
-	const dropdowns = document.querySelectorAll('.dropdown');
+const rotators = document.querySelectorAll('.rotator');
 
-	dropdowns.forEach(dropdown => {
-		const valueElement = dropdown.querySelector('.dropdown__value');
-		const listElement = dropdown.querySelector('.dropdown__list');
-		const itemElements = dropdown.querySelectorAll('.dropdown__item');
+rotators.forEach(rotator => {
+  let activeIndex = 0;
+  const cases = rotator.querySelectorAll('.rotator__case');
 
-		valueElement.addEventListener('click', (event) => {
-			listElement.classList.toggle('dropdown__list_active');
-		});
+  // Функция для смены слайда
+  function changeSlide() {
+    // Убираем активный класс у текущего слайда
+    cases[activeIndex].classList.remove('rotator__case_active');
 
-		itemElements.forEach(item => {
-			const linkElement = item.querySelector('.dropdown__link');
-			linkElement.addEventListener('click', (event) => {
-				event.preventDefault();
-				valueElement.textContent = linkElement.textContent;
-				listElement.classList.remove('dropdown__list_active');
-			});
-		});
-	});
+    // Переходим к следующему слайду
+    activeIndex = (activeIndex + 1) % cases.length;
+
+    const nextCase = cases[activeIndex];
+
+    // Устанавливаем новый активный слайд
+    nextCase.classList.add('rotator__case_active');
+
+    // Меняем цвет текста
+    nextCase.style.color = nextCase.dataset.color;
+
+    // Возвращаем скорость для следующего интервала
+    return nextCase.dataset.speed || 1000; // По умолчанию 1000 мс
+  }
+
+  // Начальная установка интервала
+  let interval = setInterval(function run() {
+    let nextSpeed = changeSlide();
+    clearInterval(interval);  // Очищаем старый интервал
+    interval = setInterval(run, nextSpeed);  // Устанавливаем новый с учетом скорости
+  }, cases[0].dataset.speed || 1000);  // Начальная скорость
 });
